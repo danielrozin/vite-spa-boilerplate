@@ -86,6 +86,58 @@ document.querySelector('#app').innerHTML = `
         </div>
       </div>
     </section>
+
+    <section class="qa-section">
+      <div class="container">
+        <h2 class="section-title">Frequently Asked Questions</h2>
+        <div class="qa-grid">
+          <div class="qa-item">
+            <h3>What's included with every iPhone?</h3>
+            <p>Every iPhone comes with a USB-C to Lightning cable, documentation, and industry-leading support. The box is designed to be as small as possible to reduce environmental impact.</p>
+          </div>
+          <div class="qa-item">
+            <h3>How long is the warranty?</h3>
+            <p>Every iPhone comes with one year of hardware repair coverage and 90 days of complimentary technical support. You can also purchase AppleCare+ for extended coverage.</p>
+          </div>
+          <div class="qa-item">
+            <h3>Can I trade in my current phone?</h3>
+            <p>Yes! Apple Trade In lets you recycle any device at any Apple Store location and on apple.com for free. If your device has trade-in value, you'll receive credit toward a new purchase.</p>
+          </div>
+          <div class="qa-item">
+            <h3>What payment options are available?</h3>
+            <p>You can pay with Apple Card Monthly Installments, carrier financing, or pay in full. We also accept all major credit cards and Apple Pay.</p>
+          </div>
+          <div class="qa-item">
+            <h3>Is my data secure on iPhone?</h3>
+            <p>iPhone is designed to protect your privacy and security. Features like Face ID, Touch ID, and end-to-end encryption help keep your personal information safe.</p>
+          </div>
+          <div class="qa-item">
+            <h3>How do I transfer data from my old phone?</h3>
+            <p>Use Quick Start to transfer data from your current device to your new iPhone. You can also restore from an iCloud backup or use the Move to iOS app on Android.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="waitlist-section">
+      <div class="container">
+        <div class="waitlist-content">
+          <h2 class="waitlist-title">Be the first to know</h2>
+          <p class="waitlist-subtitle">Get notified about new iPhone releases, exclusive offers, and the latest Apple news.</p>
+          <form class="waitlist-form" id="waitlistForm">
+            <div class="email-input-group">
+              <input type="email" class="email-input" placeholder="Enter your email address" required id="emailInput">
+              <button type="submit" class="subscribe-button">Join Waitlist</button>
+            </div>
+          </form>
+          <div class="success-message" id="successMessage" style="display: none;">
+            <div class="success-icon">✓</div>
+            <h3>Successfully signed up!</h3>
+            <p>You'll be the first to know about new iPhone releases and exclusive offers.</p>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
 
   <footer class="footer">
@@ -181,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }, observerOptions);
 
   // Observe all animated elements
-  const animatedElements = document.querySelectorAll('.product-card, .feature-item, .section-title');
+  const animatedElements = document.querySelectorAll('.product-card, .feature-item, .section-title, .qa-item, .waitlist-content');
   animatedElements.forEach((element) => {
     element.style.opacity = '0';
     element.style.transform = 'translateY(30px) scale(0.9)';
@@ -223,4 +275,46 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start typing after page load
     setTimeout(typeWriter, 500);
   }
+
+  // Waitlist form functionality
+  const waitlistForm = document.getElementById('waitlistForm');
+  const emailInput = document.getElementById('emailInput');
+  const successMessage = document.getElementById('successMessage');
+
+  waitlistForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    
+    const email = emailInput.value.trim();
+    if (email && email.includes('@')) {
+      // Mock API call simulation
+      const submitButton = waitlistForm.querySelector('.subscribe-button');
+      submitButton.textContent = 'Joining...';
+      submitButton.disabled = true;
+      
+      setTimeout(() => {
+        // Hide form and show success message
+        waitlistForm.style.display = 'none';
+        successMessage.style.display = 'block';
+        successMessage.style.opacity = '0';
+        successMessage.style.transform = 'translateY(20px)';
+        
+        // Animate success message
+        setTimeout(() => {
+          successMessage.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+          successMessage.style.opacity = '1';
+          successMessage.style.transform = 'translateY(0)';
+        }, 100);
+        
+        // Store email in mock data (localStorage for persistence)
+        const existingEmails = JSON.parse(localStorage.getItem('waitlistEmails') || '[]');
+        existingEmails.push({
+          email: email,
+          timestamp: new Date().toISOString()
+        });
+        localStorage.setItem('waitlistEmails', JSON.stringify(existingEmails));
+        
+        console.log('Email stored in mock data:', email);
+      }, 1500);
+    }
+  });
 });
