@@ -4,13 +4,106 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/javascript.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <title>iPhone - Apple</title>
+    <meta name="description" content="Discover the perfect iPhone for you. Compare iPhone 15 Pro, iPhone 15, iPhone 14, and iPhone SE with our interactive quiz and detailed specifications." />
+    <meta name="keywords" content="iPhone, Apple, smartphone, iPhone 15 Pro, iPhone 15, iPhone 14, iPhone SE, mobile phone" />
+    <meta name="author" content="Apple Inc." />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://apple.com/iphone/" />
+    <meta property="og:title" content="iPhone - Designed to be loved - Apple" />
+    <meta property="og:description" content="Discover the perfect iPhone for you. Compare iPhone 15 Pro, iPhone 15, iPhone 14, and iPhone SE." />
+    <meta property="og:image" content="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1692845702774" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://apple.com/iphone/" />
+    <meta property="twitter:title" content="iPhone - Designed to be loved - Apple" />
+    <meta property="twitter:description" content="Discover the perfect iPhone for you. Compare iPhone 15 Pro, iPhone 15, iPhone 14, and iPhone SE." />
+    <meta property="twitter:image" content="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=1200&hei=630&fmt=jpeg&qlt=95&.v=1692845702774" />
+    
+    <!-- Preconnect to external domains for performance -->
+    <link rel="preconnect" href="https://store.storeimages.cdn-apple.com" />
+    <link rel="dns-prefetch" href="https://store.storeimages.cdn-apple.com" />
+    
+    <!-- Critical CSS inline would go here for production -->
+    
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#0071e3" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a84ff" media="(prefers-color-scheme: dark)" />
+    
+    <title>iPhone - Designed to be loved - Apple</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <!-- Loading skeleton for better perceived performance -->
+      <div class="loading-skeleton" id="loadingSkeleton">
+        <div class="skeleton-navbar"></div>
+        <div class="skeleton-hero"></div>
+        <div class="skeleton-content"></div>
+      </div>
+    </div>
+    
+    <!-- Preload critical images -->
+    <link rel="preload" as="image" href="https://store.storeimages.cdn-apple.com/4982/as-images.apple.com/is/iphone-15-pro-finish-select-202309-6-7inch-naturaltitanium?wid=300&hei=300&fmt=p-jpg&qlt=80&.v=1692845702774" />
+    
+    <!-- Service Worker registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+    </script>
+    
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
+
+<style>
+  /* Loading skeleton styles - inline for immediate rendering */
+  .loading-skeleton {
+    animation: pulse 1.5s ease-in-out infinite alternate;
+  }
+  
+  .skeleton-navbar {
+    height: 60px;
+    background: #f0f0f0;
+    margin-bottom: 0;
+  }
+  
+  .skeleton-hero {
+    height: 400px;
+    background: linear-gradient(135deg, #e0e0e0, #f0f0f0);
+    margin-bottom: 40px;
+  }
+  
+  .skeleton-content {
+    height: 300px;
+    background: #f0f0f0;
+    margin: 0 20px;
+    border-radius: 12px;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 1; }
+    100% { opacity: 0.6; }
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    .skeleton-navbar,
+    .skeleton-content {
+      background: #2d2d2d;
+    }
+    
+    .skeleton-hero {
+      background: linear-gradient(135deg, #1d1d1f, #2d2d2d);
+    }
+  }
+</style>

@@ -5,11 +5,12 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  line-height: 1.5;
   color: #1d1d1f;
-  background-color: #ffffff;
+  background-color: #f5f5f7;
   overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
 .container {
@@ -115,11 +116,11 @@ main {
 }
 
 .hero-title {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 20px;
-  letter-spacing: -2px;
+  letter-spacing: -0.5px;
   background: linear-gradient(45deg, #ffffff, #e0e0ff, #ffffff);
   background-size: 200% 200%;
   -webkit-background-clip: text;
@@ -129,6 +130,7 @@ main {
   overflow: hidden;
   white-space: nowrap;
   border-right: 3px solid #ffffff;
+  line-height: 1.0834933333;
 }
 
 @keyframes shimmer {
@@ -153,26 +155,29 @@ main {
 }
 
 .hero-subtitle {
-  font-family: 'JetBrains Mono', monospace;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
   font-size: 1.5rem;
-  font-weight: 300;
+  font-weight: 400;
   opacity: 0.9;
   animation: fadeInUp 1.2s ease-out 0.5s both;
+  line-height: 1.4705882353;
 }
 
 .product-lineup {
   padding: 80px 0;
-  background-color: #fbfbfb;
+  background-color: #f5f5f7;
 }
 
 .section-title {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 48px;
   font-weight: 600;
   margin-bottom: 60px;
   color: #1d1d1f;
   position: relative;
-  font-family: 'Inter', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+  line-height: 1.0834933333;
+  letter-spacing: -0.003em;
 }
 
 .section-title::after {
@@ -183,15 +188,30 @@ main {
   transform: translateX(-50%);
   width: 60px;
   height: 3px;
-  background: linear-gradient(90deg, #007aff, #667eea);
+  background: linear-gradient(90deg, #0071e3, #005bb5);
   border-radius: 2px;
 }
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
   margin-top: 40px;
+}
+
+/* Responsive breakpoints */
+@media (max-width: 1024px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
 }
 
 .product-card {
@@ -225,35 +245,84 @@ main {
   left: 100%;
 }
 
-.product-image {
-  font-size: 4rem;
+.product-image-container {
+  width: 100%;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 20px;
-  animation: bounce 2s ease-in-out infinite;
-  position: relative;
-  z-index: 1;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-10px); }
-  60% { transform: translateY(-5px); }
+.product-image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+  transform: scale(1.05);
+}
+
+/* Find iPhone button */
+.find-iphone-container {
+  text-align: center;
+  margin-top: 60px;
+}
+
+.find-iphone-button {
+  background: linear-gradient(135deg, #0071e3, #005bb5);
+  color: white;
+  border: none;
+  border-radius: 980px;
+  padding: 16px 32px;
+  font-size: 17px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}
+
+.find-iphone-button:hover {
+  background: linear-gradient(135deg, #005bb5, #004494);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 113, 227, 0.3);
+}
+
+.find-iphone-button:focus {
+  outline: 2px solid #0071e3;
+  outline-offset: 2px;
+}
+
+.button-icon {
+  font-size: 20px;
 }
 
 .product-name {
-  font-size: 1.75rem;
+  font-size: 24px;
   font-weight: 600;
   margin-bottom: 15px;
   color: #1d1d1f;
-  font-family: 'Inter', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
   position: relative;
   z-index: 1;
+  line-height: 1.1666666667;
+  letter-spacing: 0.009em;
 }
 
 .product-description {
-  font-size: 1rem;
+  font-size: 17px;
   color: #6e6e73;
   margin-bottom: 20px;
   line-height: 1.5;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
 }
 
 .product-price {
@@ -267,19 +336,21 @@ main {
 }
 
 .buy-button {
-  background: linear-gradient(45deg, #007aff, #667eea);
+  background: #0071e3;
   color: white;
   border: none;
-  border-radius: 25px;
-  padding: 12px 30px;
-  font-size: 1rem;
-  font-weight: 500;
+  border-radius: 980px;
+  padding: 12px 24px;
+  font-size: 17px;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   overflow: hidden;
   z-index: 1;
-  font-family: 'Inter', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  min-height: 44px;
+  min-width: 44px;
 }
 
 .buy-button::before {
@@ -295,8 +366,9 @@ main {
 }
 
 .buy-button:hover {
-  transform: scale(1.05) translateY(-2px);
-  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+  background: #005bb5;
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 113, 227, 0.3);
 }
 
 .buy-button:hover::before {
@@ -305,6 +377,11 @@ main {
 
 .buy-button:active {
   transform: scale(0.98);
+}
+
+.buy-button:focus {
+  outline: 2px solid #0071e3;
+  outline-offset: 2px;
 }
 
 .features {
@@ -346,6 +423,36 @@ main {
 .footer p {
   color: #6e6e73;
   font-size: 0.875rem;
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.footer-link {
+  color: #6e6e73;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: color 0.3s ease;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+}
+
+.footer-link:hover,
+.footer-link:focus {
+  color: #0071e3;
+  outline: none;
+}
+
+.footer-link:focus-visible {
+  outline: 2px solid #0071e3;
+  outline-offset: 2px;
+  border-radius: 4px;
 }
 
 /* Floating particles animation */
@@ -373,47 +480,128 @@ main {
   100% { transform: translateY(-100px) translateX(50px); }
 }
 
-/* Smooth scroll behavior */
+/* Accessibility and scroll behavior */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
+/* Skip link for keyboard navigation */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 8px;
+  z-index: 10000;
+  background: #0071e3;
+  color: white;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 14px;
+  transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+  top: 8px;
+}
+
+/* Screen reader only content */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Focus indicators */
+.nav-link:focus,
+.product-card:focus,
+.feature-item:focus {
+  outline: 2px solid #0071e3;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  .hero::before,
+  .hero::after {
+    animation: none;
+  }
+}
+
+/* Custom scrollbar with Apple styling */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f5f5f7;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(45deg, #007aff, #667eea);
-  border-radius: 10px;
+  background: #d1d1d6;
+  border-radius: 6px;
+  border: 2px solid #f5f5f7;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(45deg, #667eea, #007aff);
+  background: #a1a1a6;
 }
 
-/* Feature items hover animation */
+/* Feature items styling */
 .feature-item {
   transition: all 0.3s ease;
   cursor: pointer;
+  padding: 30px;
+  text-align: center;
+  border-radius: 12px;
+  tabindex: 0;
 }
 
-.feature-item:hover {
+.feature-item:hover,
+.feature-item:focus {
   transform: translateY(-5px);
-  background: linear-gradient(135deg, rgba(0, 122, 255, 0.05), rgba(102, 126, 234, 0.05));
-  border-radius: 12px;
+  background: linear-gradient(135deg, rgba(0, 113, 227, 0.05), rgba(102, 126, 234, 0.05));
+  outline: none;
+}
+
+.feature-icon {
+  font-size: 2.5rem;
+  margin-bottom: 16px;
+  display: block;
 }
 
 .feature-item h3 {
   transition: color 0.3s ease;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #1d1d1f;
 }
 
-.feature-item:hover h3 {
-  color: #007aff;
+.feature-item:hover h3,
+.feature-item:focus h3 {
+  color: #0071e3;
+}
+
+.feature-item p {
+  font-size: 1rem;
+  color: #6e6e73;
+  line-height: 1.6;
 }
 
 /* Q&A Section */
@@ -649,6 +837,22 @@ html {
   line-height: 1.6;
 }
 
+/* Tablet styles */
+@media (max-width: 1024px) and (min-width: 769px) {
+  .section-title {
+    font-size: 40px;
+  }
+  
+  .hero-title {
+    font-size: 3.5rem;
+  }
+  
+  .container {
+    padding: 0 32px;
+  }
+}
+
+/* Mobile styles */
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -657,6 +861,7 @@ html {
   .hero-title {
     font-size: 2.5rem;
     white-space: normal;
+    letter-spacing: -0.3px;
   }
   
   .hero-subtitle {
@@ -664,11 +869,16 @@ html {
   }
   
   .section-title {
-    font-size: 2rem;
+    font-size: 32px;
+    letter-spacing: -0.002em;
   }
   
-  .product-grid {
-    grid-template-columns: 1fr;
+  .product-name {
+    font-size: 21px;
+  }
+  
+  .product-description {
+    font-size: 16px;
   }
   
   .feature-grid {
@@ -704,9 +914,444 @@ html {
   .email-input,
   .subscribe-button {
     width: 100%;
+    min-height: 44px;
   }
   
   .success-message {
     padding: 30px 20px;
+  }
+  
+  .container {
+    padding: 0 20px;
+  }
+  
+  /* Ensure minimum font size of 16px for mobile */
+  .email-input {
+    font-size: 16px;
+  }
+}
+
+/* Comparison Section */
+.comparison-section {
+  padding: 80px 0;
+  background-color: white;
+}
+
+.comparison-toggle {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 40px;
+}
+
+.toggle-button {
+  background: #f5f5f7;
+  color: #1d1d1f;
+  border: none;
+  border-radius: 980px;
+  padding: 8px 16px;
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}
+
+.toggle-button.active,
+.toggle-button:hover {
+  background: #0071e3;
+  color: white;
+}
+
+.toggle-button:focus {
+  outline: 2px solid #0071e3;
+  outline-offset: 2px;
+}
+
+.comparison-table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.comparison-table th,
+.comparison-table td {
+  padding: 16px;
+  text-align: left;
+  border-bottom: 1px solid #f5f5f7;
+  font-size: 14px;
+  line-height: 1.4285714286;
+}
+
+.comparison-table th {
+  background: #f5f5f7;
+  font-weight: 600;
+  color: #1d1d1f;
+}
+
+.comparison-table th[scope="col"] {
+  text-align: center;
+}
+
+.comparison-table th[scope="row"] {
+  font-weight: 500;
+  width: 120px;
+}
+
+.comparison-table td {
+  text-align: center;
+  color: #6e6e73;
+}
+
+/* Quiz Modal */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(10px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.modal-header {
+  padding: 24px 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6e6e73;
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  background: #f5f5f7;
+  color: #1d1d1f;
+  outline: none;
+}
+
+.modal-body {
+  padding: 24px;
+}
+
+.quiz-step {
+  display: none;
+}
+
+.quiz-step.active {
+  display: block;
+}
+
+.quiz-step h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1d1d1f;
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.quiz-option {
+  background: #f5f5f7;
+  color: #1d1d1f;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  padding: 16px 20px;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  min-height: 44px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}
+
+.quiz-option:hover,
+.quiz-option:focus {
+  background: #e8f4ff;
+  border-color: #0071e3;
+  outline: none;
+}
+
+.quiz-option:active {
+  transform: scale(0.98);
+}
+
+.quiz-result {
+  text-align: center;
+}
+
+.result-content h3 {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  color: #1d1d1f;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+.recommended-phone {
+  background: #f5f5f7;
+  border-radius: 12px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.result-phone-image {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.recommended-phone h4 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+}
+
+.recommended-phone p {
+  font-size: 16px;
+  color: #6e6e73;
+  margin: 0;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.result-cta {
+  background: #0071e3;
+  color: white;
+  border: none;
+  border-radius: 980px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 44px;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+}
+
+.result-cta:hover {
+  background: #005bb5;
+  transform: translateY(-2px);
+}
+
+.result-cta:focus {
+  outline: 2px solid #0071e3;
+  outline-offset: 2px;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #000;
+    color: #f5f5f7;
+  }
+  
+  .navbar {
+    background-color: rgba(0, 0, 0, 0.95);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .nav-link {
+    color: #f5f5f7;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    color: #0a84ff;
+  }
+  
+  .product-lineup,
+  .comparison-section {
+    background-color: #000;
+  }
+  
+  .section-title {
+    color: #f5f5f7;
+  }
+  
+  .product-card,
+  .qa-item,
+  .comparison-table {
+    background: #1d1d1f;
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.08);
+  }
+  
+  .product-name,
+  .qa-item h3,
+  .comparison-table th {
+    color: #f5f5f7;
+  }
+  
+  .product-description,
+  .qa-item p,
+  .comparison-table td {
+    color: #a1a1a6;
+  }
+  
+  .buy-button {
+    background: #0a84ff;
+  }
+  
+  .buy-button:hover {
+    background: #0066cc;
+  }
+  
+  .footer {
+    background-color: #000;
+    border-top: 1px solid #2d2d2d;
+  }
+  
+  .footer p,
+  .footer-link {
+    color: #a1a1a6;
+  }
+  
+  .footer-link:hover,
+  .footer-link:focus {
+    color: #0a84ff;
+  }
+  
+  .toggle-button {
+    background: #2d2d2d;
+    color: #f5f5f7;
+  }
+  
+  .toggle-button.active,
+  .toggle-button:hover {
+    background: #0a84ff;
+  }
+  
+  .comparison-table th {
+    background: #2d2d2d;
+  }
+  
+  .modal-content {
+    background: #1d1d1f;
+  }
+  
+  .modal-title,
+  .quiz-step h3,
+  .result-content h3,
+  .recommended-phone h4 {
+    color: #f5f5f7;
+  }
+  
+  .modal-close {
+    color: #a1a1a6;
+  }
+  
+  .modal-close:hover,
+  .modal-close:focus {
+    background: #2d2d2d;
+    color: #f5f5f7;
+  }
+  
+  .quiz-option {
+    background: #2d2d2d;
+    color: #f5f5f7;
+  }
+  
+  .quiz-option:hover,
+  .quiz-option:focus {
+    background: #0a2540;
+    border-color: #0a84ff;
+  }
+  
+  .recommended-phone {
+    background: #2d2d2d;
+  }
+  
+  .recommended-phone p {
+    color: #a1a1a6;
+  }
+  
+  .result-cta {
+    background: #0a84ff;
+  }
+  
+  .result-cta:hover {
+    background: #0066cc;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #000;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #2d2d2d;
+    border: 2px solid #000;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #424242;
   }
 }
