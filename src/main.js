@@ -138,36 +138,89 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Add parallax effect to hero section
+  // Enhanced parallax effects
   window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
+    const rate = scrolled * -0.5;
+    const rateHero = scrolled * 0.3;
+    
     const hero = document.querySelector('.hero');
+    const heroContent = document.querySelector('.hero-content');
+    
     if (hero) {
-      hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+      hero.style.transform = `translateY(${rateHero}px)`;
+    }
+    
+    if (heroContent) {
+      heroContent.style.transform = `translateY(${rate}px)`;
+    }
+    
+    // Navbar background opacity based on scroll
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+      const opacity = Math.min(scrolled / 100, 0.95);
+      navbar.style.backgroundColor = `rgba(255, 255, 255, ${opacity})`;
     }
   });
 
-  // Add fade-in animation for product cards
+  // Enhanced fade-in animations with staggered effect
   const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -100px 0px'
   };
 
   const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
+    entries.forEach((entry, index) => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity = '1';
-        entry.target.style.transform = 'translateY(0)';
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0) scale(1)';
+        }, index * 150); // Staggered animation
       }
     });
   }, observerOptions);
 
-  // Observe product cards for animations
-  const productCards = document.querySelectorAll('.product-card');
-  productCards.forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(30px)';
-    card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-    observer.observe(card);
+  // Observe all animated elements
+  const animatedElements = document.querySelectorAll('.product-card, .feature-item, .section-title');
+  animatedElements.forEach((element) => {
+    element.style.opacity = '0';
+    element.style.transform = 'translateY(30px) scale(0.9)';
+    element.style.transition = 'opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1), transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)';
+    observer.observe(element);
   });
+
+  // Add cursor trail effect
+  let mouseTrail = [];
+  document.addEventListener('mousemove', (e) => {
+    mouseTrail.push({ x: e.clientX, y: e.clientY, time: Date.now() });
+    if (mouseTrail.length > 10) mouseTrail.shift();
+    
+    // Clean old trail points
+    mouseTrail = mouseTrail.filter(point => Date.now() - point.time < 1000);
+  });
+
+  // Add typing animation to hero title
+  const heroTitle = document.querySelector('.hero-title');
+  if (heroTitle) {
+    const text = heroTitle.textContent;
+    heroTitle.textContent = '';
+    heroTitle.style.borderRight = '3px solid #ffffff';
+    
+    let i = 0;
+    const typeWriter = () => {
+      if (i < text.length) {
+        heroTitle.textContent += text.charAt(i);
+        i++;
+        setTimeout(typeWriter, 150);
+      } else {
+        // Remove cursor after typing
+        setTimeout(() => {
+          heroTitle.style.borderRight = 'none';
+        }, 1000);
+      }
+    };
+    
+    // Start typing after page load
+    setTimeout(typeWriter, 500);
+  }
 });

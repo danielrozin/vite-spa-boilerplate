@@ -5,10 +5,11 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
   line-height: 1.6;
   color: #1d1d1f;
   background-color: #ffffff;
+  overflow-x: hidden;
 }
 
 .container {
@@ -26,6 +27,18 @@ body {
   left: 0;
   right: 0;
   z-index: 1000;
+  animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .nav-container {
@@ -70,19 +83,81 @@ main {
   color: white;
   text-align: center;
   padding: 120px 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8ZGVmcz4KICAgIDxwYXR0ZXJuIGlkPSJncmlkIiB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPgogICAgICA8cGF0aCBkPSJNIDYwIDAgTCAwIDAgMCA2MCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSJyZ2JhKDI1NSwyNTUsMjU1LDAuMSkiIHN0cm9rZS13aWR0aD0iMSIvPgogICAgPC9wYXR0ZXJuPgogIDwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIiAvPgo8L3N2Zz4=') repeat;
+  opacity: 0.3;
+  animation: float 20s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(1deg); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  animation: fadeInUp 1.2s ease-out;
 }
 
 .hero-title {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 4rem;
   font-weight: 700;
   margin-bottom: 20px;
   letter-spacing: -2px;
+  background: linear-gradient(45deg, #ffffff, #e0e0ff, #ffffff);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 3s ease-in-out infinite, typewriter 2s steps(8) 1;
+  overflow: hidden;
+  white-space: nowrap;
+  border-right: 3px solid #ffffff;
+}
+
+@keyframes shimmer {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+@keyframes typewriter {
+  from { width: 0; }
+  to { width: 100%; }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .hero-subtitle {
+  font-family: 'JetBrains Mono', monospace;
   font-size: 1.5rem;
   font-weight: 300;
   opacity: 0.9;
+  animation: fadeInUp 1.2s ease-out 0.5s both;
 }
 
 .product-lineup {
@@ -96,6 +171,20 @@ main {
   font-weight: 600;
   margin-bottom: 60px;
   color: #1d1d1f;
+  position: relative;
+  font-family: 'Inter', sans-serif;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 3px;
+  background: linear-gradient(90deg, #007aff, #667eea);
+  border-radius: 2px;
 }
 
 .product-grid {
@@ -111,17 +200,43 @@ main {
   padding: 40px 30px;
   text-align: center;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.product-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(0, 122, 255, 0.1), transparent);
+  transition: left 0.6s ease;
 }
 
 .product-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) scale(1.02);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+.product-card:hover::before {
+  left: 100%;
 }
 
 .product-image {
   font-size: 4rem;
   margin-bottom: 20px;
+  animation: bounce 2s ease-in-out infinite;
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-10px); }
+  60% { transform: translateY(-5px); }
 }
 
 .product-name {
@@ -129,6 +244,9 @@ main {
   font-weight: 600;
   margin-bottom: 15px;
   color: #1d1d1f;
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  z-index: 1;
 }
 
 .product-description {
@@ -143,10 +261,13 @@ main {
   font-weight: 600;
   color: #1d1d1f;
   margin-bottom: 25px;
+  font-family: 'JetBrains Mono', monospace;
+  position: relative;
+  z-index: 1;
 }
 
 .buy-button {
-  background-color: #007aff;
+  background: linear-gradient(45deg, #007aff, #667eea);
   color: white;
   border: none;
   border-radius: 25px;
@@ -154,12 +275,36 @@ main {
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  font-family: 'Inter', sans-serif;
+}
+
+.buy-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(45deg, #667eea, #007aff);
+  transition: left 0.3s ease;
+  z-index: -1;
 }
 
 .buy-button:hover {
-  background-color: #0056cc;
-  transform: scale(1.05);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 122, 255, 0.3);
+}
+
+.buy-button:hover::before {
+  left: 0;
+}
+
+.buy-button:active {
+  transform: scale(0.98);
 }
 
 .features {
@@ -203,6 +348,74 @@ main {
   font-size: 0.875rem;
 }
 
+/* Floating particles animation */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, rgba(255,255,255,0.2), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255,255,255,0.4), transparent),
+    radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.3), transparent),
+    radial-gradient(2px 2px at 160px 30px, rgba(255,255,255,0.2), transparent);
+  background-repeat: repeat;
+  background-size: 200px 100px;
+  animation: particles 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes particles {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-100px) translateX(50px); }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #007aff, #667eea);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #667eea, #007aff);
+}
+
+/* Feature items hover animation */
+.feature-item {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.feature-item:hover {
+  transform: translateY(-5px);
+  background: linear-gradient(135deg, rgba(0, 122, 255, 0.05), rgba(102, 126, 234, 0.05));
+  border-radius: 12px;
+}
+
+.feature-item h3 {
+  transition: color 0.3s ease;
+}
+
+.feature-item:hover h3 {
+  color: #007aff;
+}
+
 @media (max-width: 768px) {
   .nav-links {
     display: none;
@@ -210,6 +423,7 @@ main {
   
   .hero-title {
     font-size: 2.5rem;
+    white-space: normal;
   }
   
   .hero-subtitle {
@@ -226,5 +440,10 @@ main {
   
   .feature-grid {
     grid-template-columns: 1fr;
+  }
+  
+  .hero::before,
+  .hero::after {
+    display: none;
   }
 }
